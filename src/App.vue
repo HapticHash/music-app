@@ -5,7 +5,16 @@
     </header>
     <main>
       <section class="player">
-        <h2 class="song-title"> {{ current.title }} </h2>
+        <h2 class="song-title"> {{ current.title }} - <span> {{ current.artist }} </span> </h2>
+        <div class="contro">
+          <button class="prev">Prev</button>
+          <button class="play" v-if="!isPlaying" @click="play">Play</button>
+          <button class="pause" v-else @click="pause">Pause</button>
+          <button class="next">Next</button>
+        </div>
+      </section>
+      <section class="playlist">
+
       </section>
     </main>
   </div>
@@ -17,15 +26,31 @@ export default {
   name: 'App',
   data() {
     return {
-      current: {
-        title: 'Song Title'
-      },
+      current: {},
+      index: 0,
+      isPlaying: false,
       songs: [{
         title: 'Yummy Yummy',
         artist: 'Justin Bieber',
         src: './assets/Justin_Bieber_Yummy_Official_Video_.mp3'
-      }]
+      }],
+      player: new Audio()
     }
+  },
+  methods: {
+    play(song) {
+      if(typeof song.src != "undefined") {
+        this.current = song;
+        this.player.src = this.current.src;
+      }
+      this.player.play();
+      this.isPlaying = true;
+    }
+  },
+  created() {
+    this.current = this.songs[this.index];
+    this.player.src = this.current.src;
+    //this.player.play();
   }
 
 }
