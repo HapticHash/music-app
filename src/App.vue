@@ -14,7 +14,10 @@
         </div>
       </section>
       <section class="playlist">
-
+        <h3>The Playlist</h3>
+        <button v-for="song in songs" :key="song.src" @click="play(song)" :class="(song.src == current.src) ? 'song playing': 'song'">
+          {{ song.title }} - {{ song.artist }}
+        </button>
       </section>
     </main>
   </div>
@@ -45,6 +48,10 @@ export default {
       }
       this.player.play();
       this.isPlaying = true;
+    },
+    pause() {
+      this.player.pause();
+      this.isPlaying = false;
     }
   },
   created() {
