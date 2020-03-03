@@ -6,7 +6,7 @@
     <main>
       <section class="player">
         <h2 class="song-title"> {{ current.title }} - <span> {{ current.artist }} </span> </h2>
-        <div class="contro">
+        <div class="controls">
           <button class="prev" @click="prev">Prev</button>
           <button class="play" v-if="!isPlaying" @click="play">Play</button>
           <button class="pause" v-else @click="pause">Pause</button>
@@ -80,23 +80,99 @@ export default {
 </script>
 
 <style>
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
-
 body {
-  font-family: sans-serif;
+	font-family: sans-serif;
 }
-
 header {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 15px;
+	background-color: #212121;
+	color: #FFF;
+}
+main {
+  width: 100%;
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 25px;
+}
+.song-title {
+  color: #53565A;
+  font-size: 32px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 5vh;
+}
+.song-title span {
+  font-weight: 400;
+  font-style: italic;
+}
+.controls {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 30px 15px;
+}
+button {
+  appearance: none;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+button:hover {
+  opacity: 0.8;
+}
+.play, .pause {
+  font-size: 20px;
+  font-weight: 700;
+  padding: 15px 25px;
+  margin: 0px 15px;
+  border-radius: 8px;
+  color: #FFF;
+  background-color: #CC2E5D;
+}
+.next, .prev {
+  font-size: 16px;
+  font-weight: 700;
+  padding: 10px 20px;
+  margin: 0px 15px;
+  border-radius: 6px;
+  color: #FFF;
+  background-color: #FF5858;
+}
+.playlist {
+  padding: 0px 30px;
+  margin-top: 5vh;
+}
+.playlist h3 {
+  color: #212121;
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 30px;
+  text-align: center;
+}
+.playlist .song {
+  display: block;
+  width: 100%;
   padding: 15px;
-  background-color: #212121;
-  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.playlist .song:hover {
+  color: #FF5858;
+}
+.playlist .song.playing {
+  color: #FFF;
+  background-image: linear-gradient(to right, #CC2E5D, #FF5858);
 }
 
 </style>
