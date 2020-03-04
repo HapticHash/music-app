@@ -156,7 +156,10 @@ button {
   cursor: pointer;
 }
 button:hover {
-  opacity: 0.8;
+  /* opacity: 0.8; */
+  -webkit-box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.19), 0 6px 6px 0 rgba(0, 0, 0, 0.23);  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.19), 0 6px 6px 0 rgba(0, 0, 0, 0.23);  /* Firefox 3.5 - 3.6 */
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.19), 0 6px 6px 0 rgba(0, 0, 0, 0.23);  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
 }
 .play, .pause {
   font-size: 20px;
@@ -178,7 +181,7 @@ button:hover {
 }
 .playlist {
   padding: 0px 30px;
-  margin-top: 5vh;
+  margin-top: 2vh;
 }
 .playlist h3 {
   color: #212121;
