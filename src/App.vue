@@ -7,10 +7,10 @@
       <section class="player">
         <h2 class="song-title"> {{ current.title }} - <span> {{ current.artist }} </span> </h2>
         <div class="controls">
-          <button class="prev" @click="prev">Prev</button>
-          <button class="play" v-if="!isPlaying" @click="play">Play</button>
-          <button class="pause" v-else @click="pause">Pause</button>
-          <button class="next" @click="next">Next</button>
+          <button class="prev" @click="prev"><i class="fas fa-step-backward"></i></button>
+          <button class="play" v-if="!isPlaying" @click="play"><i class="fas fa-play"></i></button>
+          <button class="pause" v-else @click="pause"><i class="fas fa-pause"></i></button>
+          <button class="next" @click="next"><i class="fas fa-step-forward"></i></button>
         </div>
       </section>
       <section class="playlist">
@@ -35,7 +35,22 @@ export default {
       songs: [{
         title: 'Yummy Yummy',
         artist: 'Justin Bieber',
-        src: './assets/Justin_Bieber_Yummy_Official_Video_.mp3'
+        src: require('./assets/Justin_Bieber_Yummy_Official_Video_.mp3')
+      },
+      {
+        title: 'How Long',
+        artist: 'Charlie Puth',
+        src: require('./assets/Charlie_Puth_quot_How_Long_quot_Official_Video_.mp3')
+      },
+      {
+        title: 'Intensions',
+        artist: 'Justin Bieber',
+        src: require('./assets/Justin_Bieber_Intentions_Official_Video_Short_.mp3')
+      },
+      {
+        title: 'Sunflower',
+        artist: 'Post Malone',
+        src: require('./assets/Post_Malone_Swae_Lee_Sunflower_Spider_Man_Into_the_Spider_Verse_.mp3')
       }],
       player: new Audio()
     }
@@ -48,7 +63,20 @@ export default {
       }
       this.player.play();
       this.isPlaying = true;
+
+      this.player.play();
+      this.player.addEventListener('ended', function() {
+        this.index++;
+        if(this.index > this.songs.length-1) {
+          this.index = 0;
+        }
+
+        this.current = this.songs[this.index];
+        this.play(this.current);  
+      }.bind(this));
+      this.isPlaying = true;
     },
+
     pause() {
       this.player.pause();
       this.isPlaying = false;
@@ -133,20 +161,20 @@ button:hover {
 .play, .pause {
   font-size: 20px;
   font-weight: 700;
-  padding: 15px 25px;
+  padding: 45px;
   margin: 0px 15px;
-  border-radius: 8px;
+  border-radius: 50%;
   color: #FFF;
-  background-color: #CC2E5D;
+  background-color: #021B79;
 }
 .next, .prev {
   font-size: 16px;
   font-weight: 700;
-  padding: 10px 20px;
+  padding: 30px;
   margin: 0px 15px;
-  border-radius: 6px;
+  border-radius: 50%;
   color: #FFF;
-  background-color: #FF5858;
+  background-color: #0575E6;
 }
 .playlist {
   padding: 0px 30px;
@@ -168,11 +196,13 @@ button:hover {
   cursor: pointer;
 }
 .playlist .song:hover {
-  color: #FF5858;
+  color: #1A2980;
 }
 .playlist .song.playing {
   color: #FFF;
-  background-image: linear-gradient(to right, #CC2E5D, #FF5858);
+  background-image: linear-gradient(to right, #1A2980, #26D0CE);
 }
-
+.fas {
+  font-size: 2em;
+}
 </style>
